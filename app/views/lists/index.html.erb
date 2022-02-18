@@ -1,12 +1,14 @@
-<h1>Here is the list!</h1>
+<h1>Movie list!</h1>
 
+<div>
   <% @lists.each do |list| %>
   <%= link_to list_path(list.id) do %>
     <div>
       <%= list.name %>
+      <%= link_to "Delete", list_path(list), method: :delete, data: {confirm: "Are you sure?"} %>
     </div>
   <% end %>
   <% end %>
 
-
-  <%= link_to "Add new list",  new_list_path %>
+</div>
+  <%= link_to "Add new list",  new_list_path, class: "btn btn-success"%>

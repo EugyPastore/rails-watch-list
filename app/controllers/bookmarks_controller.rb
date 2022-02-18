@@ -3,10 +3,12 @@ class BookmarksController < ApplicationController
     @list = List.find(params[:list_id])
 
     # @movie = Movie.find(params[:list_id])
+    # instanciate form
     @bookmark = Bookmark.new
   end
 
   def create
+    # find list to associate later
     @list = List.find(params[:list_id])
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.list = @list
@@ -21,7 +23,7 @@ class BookmarksController < ApplicationController
   def destroy
     @bookmark = Bookmark.find(params[:id])
     @bookmark.destroy
-    redirect_to lists_path
+    redirect_to list_path(@bookmark.list)
   end
 
   private
