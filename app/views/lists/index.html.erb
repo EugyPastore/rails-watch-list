@@ -6,9 +6,12 @@
     <div>
       <%= list.name %>
       <%= link_to "Delete", list_path(list), method: :delete, data: {confirm: "Are you sure?"} %>
+
     </div>
   <% end %>
   <% end %>
+
+
 
 </div>
   <%= link_to "Add new list",  new_list_path, class: "btn btn-success"%>
