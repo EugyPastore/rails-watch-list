@@ -3,5 +3,8 @@
 <%= simple_form_for [@list, @bookmark] do |f| %>
   <%= f.association :movie %>
   <%= f.input :comment %>
-  <%= f.button :submit, value: "Bookmark", class: "btn btn-success" %>
+  <%= f.input :photo, as: :file %>
+  <%= f.button :submit, value: "Save", class: "btn btn-success mb-3" %>
 <% end %>
+
+<%= link_to "Back to lists",  lists_path, class: "btn btn-info"%>

@@ -1,21 +1,37 @@
-<h1>Info on <%= @list.name %></h1>
 
-<ul class="list-unstyled">
-  <% @list.bookmarks.each do |bookmark| %>
-    <li class = " mt-5 mb-5">
-      <h2><%= bookmark.movie.title %></h2>
-      <em><%= bookmark.comment%></em>
-        <span>
-          <%= link_to "Remove", bookmark_path(bookmark), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-warning small" %>
-        </span>
-    </li>
-
-  <% end %>
-
- <%=  cl_image_tag(@list.photo.key, height: 300, width: 400, crop: :fill) if @list.photo.present? %>
+<div class="container border">
+  <div class="row">
+    <div class=" banner-image col-12 border d-flex justify-content-center align-items-center" style = " height: 200px;background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path(@list.photo.key)  if @list.photo.present? %>')">
+    <h1 class="text-center align-middle"><%= @list.name %> movies</h1>
+    </div><!-- col-12-->
+  </div><!-- row-->
 
 
-</ul>
+<div class="d-flex justify-content-between my-3">
+  <h3>Bookmarks</h3>
+  <%= link_to "Add movie to #{@list.name}", new_list_bookmark_path(@list), class: "btn btn-success" %>
+</div>
 
-<%= link_to "Add bookmark in #{@list.name}", new_list_bookmark_path(@list), class: "btn btn-success" %>
-<%= link_to "Back to all lists", lists_path, class: "btn btn-primary" %>
+<div class="container">
+<div class="row d-flex justify-content-center">
+<% @list.bookmarks.each do |bookmark| %>
+  <div class="col-3 ">
+  <div class="card my-3">
+     <%= cl_image_tag(bookmark.photo.key, class: "bookmark" ) if bookmark.photo.present? %>
+
+      <div class="card-body">
+        <h2><%= bookmark.movie.title %></h2>
+        <em><%= bookmark.comment%></em>
+        <br><br>
+        <%= link_to "Remove", bookmark_path(bookmark), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+    </div><!--card-body-->
+  </div><!--card my-3-->
+
+  </div><!--col-4-->
+<% end %>
+</div><!--row-->
+</div><!--container -->
+<%= link_to "Back to all lists", lists_path, class: "btn btn-primary mb-3" %> <br>
+
+
+    <%# <%= cl_image_tag(@list.photo.key, crop: :fill) if @list.photo.present? %>
